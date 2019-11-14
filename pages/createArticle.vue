@@ -1,18 +1,98 @@
 <template>
-  <v-card class="mx-auto" max-width="400">
-    <v-form>
-      <v-text-field solo></v-text-field>
-      <v-textarea id="summernote"></v-textarea>
-    </v-form>
-  </v-card>
+  <v-app>
+    <v-list-item-action-text class="font-weight-bold display-1"
+      >Create Article</v-list-item-action-text
+    >
+    <v-container>
+      <v-row>
+        <v-col cols="1">
+          <v-list-item-action-text class="font-weight-bold subtitle-1"
+            >Title</v-list-item-action-text
+          >
+        </v-col>
+        <v-col>
+          <v-text-field
+            v-model="title"
+            outlined
+            dense
+            label="Title"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-radio-group v-model="radios">
+        <v-row>
+          <v-col>
+            <v-list-item-action-text class="font-weight-bold subtitle-1"
+              >Category</v-list-item-action-text
+            >
+          </v-col>
+          <v-col v-for="i in category" :key="i.id">
+            <v-radio :label="i.name" :value="i.id" color="indigo"></v-radio>
+          </v-col>
+        </v-row>
+      </v-radio-group>
+      <v-row>
+        <v-col cols="1">
+          <v-list-item-action-text class="font-weight-bold subtitle-1"
+            >Description</v-list-item-action-text
+          >
+        </v-col>
+        <v-col>
+          <v-textarea
+            v-model="content"
+            outlined
+            name="input-7-4"
+            label="content"
+          ></v-textarea>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col align="end">
+          <v-btn>Cancel</v-btn>
+          <v-btn class="primary" @click="create">Create</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 <script>
-import $ from 'jquery'
 export default {
+  data() {
+    return {
+      radios: '',
+      title: '',
+      content: '',
+      category: []
+    }
+  },
   mounted() {
-    $(document).ready(function() {
-      $('#summernote').summernote()
-    })
+    this.radio()
+  },
+  methods: {
+    create() {
+      this.$axios
+        .post('/article', {
+          radios: this.radios,
+          title: this.title,
+          content: this.content
+        })
+        .then(function(response) {
+          console.log(response)
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    radio() {
+      this.$axios
+        .get('/category')
+        .then(function(response) {
+          this.category = response.data.data
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    }
   }
 }
 </script>

@@ -53,7 +53,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'http://192.168.43.69:8000/',
+    baseURL: 'https://test-kmtoolsv2.herokuapp.com/',
     credentials: false
   },
 
@@ -79,9 +79,9 @@ export default {
     }
   },
 
-  router: {
-    middleware: ['auth']
-  },
+  // router: {
+  //   middleware: ['auth']
+  // },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
