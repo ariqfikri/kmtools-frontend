@@ -1,8 +1,7 @@
 <template>
   <v-app>
-    <p>{{ radios || 'null' }}</p>
     <v-list-item-action-text class="font-weight-bold display-1"
-      >Create Article</v-list-item-action-text
+      >Create Report Error</v-list-item-action-text
     >
     <v-container>
       <v-row>
@@ -20,7 +19,8 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-radio-group v-model="radios">
+
+      <v-radio-group v-model="radioCategory">
         <v-row>
           <v-col>
             <v-list-item-action-text class="font-weight-bold subtitle-1"
@@ -43,7 +43,7 @@
             v-model="content"
             outlined
             name="input-7-4"
-            label="content"
+            label="Description"
           ></v-textarea>
         </v-col>
       </v-row>
@@ -61,10 +61,12 @@
 export default {
   data() {
     return {
-      radios: '',
+      
+      radioCategory: '',
       title: '',
       content: '',
-      category: []
+      category: [],
+   
     }
   },
   beforeMount() {
@@ -81,8 +83,8 @@ export default {
   methods: {
     create() {
       this.$axios
-        .post('/article/publish', {
-          id_interest_category: this.radios,
+        .post('/', {
+          id_interest_category: this.radioCategory,
           title: this.title,
           content: this.content
         })
@@ -93,9 +95,6 @@ export default {
           console.log(error)
         })
     },
-    radio() {
-     
-    }
   }
 }
 </script>
