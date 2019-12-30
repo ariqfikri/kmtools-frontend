@@ -42,6 +42,7 @@ export default {
         title: 'Ticketing',
         src: '/paper.svg',
         text: 'Report Error',
+        to: '/createError',
         flex: 2
       },
       {

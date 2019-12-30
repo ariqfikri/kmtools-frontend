@@ -17,7 +17,31 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        href:
+          'http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css',
+        rel: 'stylesheet'
+      },
+      {
+        href:
+          'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css',
+        rel: 'stylesheet'
+      }
+    ],
+    script: [
+      {
+        src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'
+      },
+      {
+        src: 'http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js'
+      },
+      {
+        src:
+          'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -46,22 +70,27 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    '@tui-nuxt/editor'
   ],
+  tui: {
+    editor: {}
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'http://192.168.43.69:8000/',
+    baseURL: 'https://api.wissen.team/',
     credentials: false
   },
 
   auth: {
     redirect: {
       login: '/login',
-      logout: '/',
-      callback: '/login'
+      logout: '/login',
+      callback: '/',
+      home: false
     },
 
     strategies: {
@@ -79,9 +108,9 @@ export default {
     }
   },
 
-  router: {
-    middleware: ['auth']
-  },
+  // router: {
+  //   middleware: ['auth']
+  // },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module

@@ -9,7 +9,7 @@
               style="border-style:solid;border-color:#448CCB"
             >
               <v-toolbar color="white black--text" dark flat>
-                <v-toolbar-title>{{ title }}</v-toolbar-title>
+                <v-toolbar-title>Create your account</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
@@ -28,13 +28,27 @@
                     outlined
                     type="password"
                   ></v-text-field>
+                  <v-text-field
+                    v-model="name"
+                    label="Name"
+                    name="Name"
+                    outlined
+                    type="text"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="username"
+                    label="Username"
+                    name="Username"
+                    outlined
+                    type="text"
+                  ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-row justify="center">
-                  <v-btn color="primary" :width="width" @click="login">{{
-                    namebutton
-                  }}</v-btn>
+                  <v-btn color="primary" width="9.4cm" @click="signup"
+                    >Agree and Sign up</v-btn
+                  >
                 </v-row>
               </v-card-actions>
             </v-card>
@@ -52,7 +66,9 @@
 </style>
 <script>
 /* eslint-disable */
+import Swal from 'sweetalert2'
     export default {
+      
         mounted() {
             console.log('Component mounted.')
         },
@@ -68,31 +84,49 @@
           title:{
             type:String,
             default:null
+          },
+          
+        },
+        data(){
+          return {
+            email:'',
+            name:'',
+            password:'',
+            username:''
           }
         },
-        data() {
-            return {
-                email: '',
-                password: '',
-            };
-        },
         methods: {
-    login() {
-     this.$auth
-.loginWith("local", {
-data: {
-email:this.email,
-password:this.password
-}
+    signup() {
+       
+     this.$axios.post('/register', {
+     email: this.email,
+     name:this.name,
+     password: this.password,
+     username:this.username   
+  })
+  .then( (response) => {
+    console.log(response);
+    Swal.fire({
+  title: 'Success',
+  icon: 'success',
+  confirmButtonText: 'Cool'
 })
-.then((response) => {
-if (this.$auth.loggedIn) { 
-console.log(user);
-this.$router.push("/");
-// alert("SUKSES BRO");
-}
-})
-.catch((error) => alert(error));
+    this.$auth.loginWith("local", {
+        data: {
+          email:this.email,
+          password:this.password
+        }
+      }).then((response) => {
+        // if (this.$auth.loggedIn) { 
+          // console.log(user);
+          this.$router.push("/role");
+          // alert("SUKSES BRO");
+        // }
+      }).catch((error) => alert(error));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
     }
   }
         

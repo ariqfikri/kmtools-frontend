@@ -13,12 +13,14 @@
                 <v-toolbar-title>Click a thing you like</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
-              <v-card-text v-for="i in button" :key="i.nama">
+              <v-card-text v-for="i in button" :key="i.name">
                 <v-btn
+                  v-model="sendId"
                   style="border-style: solid;border-color:#448CCB;background-color:white"
                   width="9.4cm"
-                  :to="i.to"
-                  >{{ i.nama }}</v-btn
+                  :value="i.id"
+                  @click="create(i.id)"
+                  >{{ i.name }}</v-btn
                 >
               </v-card-text>
             </v-card>
@@ -30,23 +32,40 @@
 </template>
 <script>
 export default {
+  /* eslint-disable */
   data() {
     return {
-      button: [
-        {
-          nama: 'Backend Developer',
-          to: '/'
-        },
-        {
-          nama: 'frontend Developer',
-          to: '/'
-        },
-        {
-          nama: 'UI/UX',
-          to: '/'
-        }
-      ]
+      button: [],
+      sendId: ''
     }
+  },
+  beforeMount() {
+    this.$axios
+      .get('/category')
+      .then((response) => {
+        console.log(response.data.data)
+        this.button = response.data.data
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  },
+   methods: {
+    create(e) {
+      console.log(this.$router)
+      this.$axios
+        .post('/auth/user/category', {
+          id_interest_category: e
+        })
+        .then(function(response) {
+          this.$router.push("/")
+          console.log(this)
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
   }
+ 
 }
 </script>
