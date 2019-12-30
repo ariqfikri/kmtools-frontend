@@ -17,7 +17,31 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        href:
+          'http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css',
+        rel: 'stylesheet'
+      },
+      {
+        href:
+          'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css',
+        rel: 'stylesheet'
+      }
+    ],
+    script: [
+      {
+        src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'
+      },
+      {
+        src: 'http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js'
+      },
+      {
+        src:
+          'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -46,14 +70,18 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    '@tui-nuxt/editor'
   ],
+  tui: {
+    editor: {}
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'https://test-kmtoolsv2.herokuapp.com/',
+    baseURL: 'https://api.wissen.team/',
     credentials: false
   },
 

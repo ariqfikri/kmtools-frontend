@@ -15,9 +15,11 @@
               </v-toolbar>
               <v-card-text v-for="i in button" :key="i.name">
                 <v-btn
+                  v-model="sendId"
                   style="border-style: solid;border-color:#448CCB;background-color:white"
                   width="9.4cm"
-                  to="/"
+                  :value="i.id"
+                  @click="create(i.id)"
                   >{{ i.name }}</v-btn
                 >
               </v-card-text>
@@ -48,6 +50,22 @@ export default {
         console.log(error)
       })
   },
+   methods: {
+    create(e) {
+      console.log(this.$router)
+      this.$axios
+        .post('/auth/user/category', {
+          id_interest_category: e
+        })
+        .then(function(response) {
+          this.$router.push("/")
+          console.log(this)
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+  }
  
 }
 </script>

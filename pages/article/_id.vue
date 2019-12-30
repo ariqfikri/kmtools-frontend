@@ -3,6 +3,7 @@
     <baca-artikel
       :title="article.title"
       :article="article.content"
+      :publish="article.published_date"
     ></baca-artikel>
   </v-app>
 </template>

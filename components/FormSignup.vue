@@ -9,7 +9,7 @@
               style="border-style:solid;border-color:#448CCB"
             >
               <v-toolbar color="white black--text" dark flat>
-                <v-toolbar-title>{{ title }}</v-toolbar-title>
+                <v-toolbar-title>Create your account</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
@@ -46,9 +46,9 @@
               </v-card-text>
               <v-card-actions>
                 <v-row justify="center">
-                  <v-btn color="primary" :width="width" @click="signup">{{
-                    namebutton
-                  }}</v-btn>
+                  <v-btn color="primary" width="9.4cm" @click="signup"
+                    >Agree and Sign up</v-btn
+                  >
                 </v-row>
               </v-card-actions>
             </v-card>
@@ -66,7 +66,9 @@
 </style>
 <script>
 /* eslint-disable */
+import Swal from 'sweetalert2'
     export default {
+      
         mounted() {
             console.log('Component mounted.')
         },
@@ -102,8 +104,25 @@
      password: this.password,
      username:this.username   
   })
-  .then(function (response) {
+  .then( (response) => {
     console.log(response);
+    Swal.fire({
+  title: 'Success',
+  icon: 'success',
+  confirmButtonText: 'Cool'
+})
+    this.$auth.loginWith("local", {
+        data: {
+          email:this.email,
+          password:this.password
+        }
+      }).then((response) => {
+        // if (this.$auth.loggedIn) { 
+          // console.log(user);
+          this.$router.push("/role");
+          // alert("SUKSES BRO");
+        // }
+      }).catch((error) => alert(error));
   })
   .catch(function (error) {
     console.log(error);

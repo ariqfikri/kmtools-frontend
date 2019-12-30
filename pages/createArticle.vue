@@ -1,50 +1,47 @@
 <template>
   <v-app>
-    <p>{{ radios || 'null' }}</p>
     <v-list-item-action-text class="font-weight-bold display-1"
       >Create Article</v-list-item-action-text
     >
     <v-container>
       <v-row>
-        <v-col cols="1">
-          <v-list-item-action-text class="font-weight-bold subtitle-1"
-            >Title</v-list-item-action-text
-          >
-        </v-col>
         <v-col>
-          <v-text-field
-            v-model="title"
-            outlined
-            dense
-            label="Title"
-          ></v-text-field>
+          <v-list-item-action-text class="font-weight-bold subtitle-1"
+            >Title Article</v-list-item-action-text
+          >
+          <v-text-field v-model="title" outlined dense></v-text-field>
         </v-col>
       </v-row>
       <v-radio-group v-model="radios">
+        <v-list-item-action-text class="font-weight-bold subtitle-1"
+          >Category</v-list-item-action-text
+        >
+        <br />
         <v-row>
-          <v-col>
-            <v-list-item-action-text class="font-weight-bold subtitle-1"
-              >Category</v-list-item-action-text
-            >
-          </v-col>
           <v-col v-for="i in category" :key="i.id">
-            <v-radio :label="i.name" :value="i.id" color="indigo"></v-radio>
+            <v-radio
+              :label="i.name"
+              :value="i.id"
+              color="info"
+              class="red--text radio-item"
+              background-color="Black"
+            ></v-radio>
           </v-col>
         </v-row>
       </v-radio-group>
       <v-row>
-        <v-col cols="1">
-          <v-list-item-action-text class="font-weight-bold subtitle-1"
-            >Description</v-list-item-action-text
-          >
-        </v-col>
         <v-col>
-          <v-textarea
-            v-model="content"
-            outlined
-            name="input-7-4"
-            label="content"
-          ></v-textarea>
+          <div id="top">
+            <!-- Text Editor -->
+            <TuiEditor
+              v-model="content"
+              mode="wysiwyg"
+              preview-style="vertical"
+              height="300px"
+            />
+
+            <!-- Markdown Viewer -->
+          </div>
         </v-col>
       </v-row>
       <v-row>
@@ -56,17 +53,28 @@
     </v-container>
   </v-app>
 </template>
+<style scoped>
+.radio-item label {
+  color: rgb(0, 0, 0);
+  font-weight: normal;
+}
+</style>
 <script>
 /* eslint-disable */
+import Swal from 'sweetalert2'
 export default {
+ 
+
   data() {
     return {
       radios: '',
       title: '',
-      content: '',
+      content: null,
       category: []
     }
   },
+  
+ 
   beforeMount() {
     this.$axios
         .get('/category')
@@ -76,7 +84,11 @@ export default {
         })
         .catch(function(error) {
           console.log(error)
-        })
+        }),
+          $(document).ready(function() {
+  $('#summernote').summernote({height: 300});
+})
+       
   },
   methods: {
     create() {
@@ -87,15 +99,19 @@ export default {
           content: this.content
         })
         .then(function(response) {
+          Swal.fire({
+        title: 'Success',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      })
           console.log(response)
         })
         .catch(function(error) {
           console.log(error)
         })
     },
-    radio() {
-     
-    }
-  }
+   
+  },
+   
 }
 </script>
