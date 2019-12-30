@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wissen-frontend-http-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/server-alias: "www.wissen.team"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+    - hosts:
+        - wissen.team
+        - www.wissen.team
+      secretName: wissen-frontend-tls
+  rules:
+    - host: wissen.team
+      http:
+        paths:
+          - backend:
+              serviceName: wissen-frontend-service
+              servicePort: 80
