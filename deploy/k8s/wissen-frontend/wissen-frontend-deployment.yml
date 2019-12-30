@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wissen-frontend-deployment
+  labels:
+    app: wissen-frontend
+spec:
+  replicas: 2
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: wissen-frontend
+  template:
+    metadata:
+      labels:
+        app: wissen-frontend
+    spec:
+      containers:
+        - name: wissen-frontend
+          image: ajaxsoften/wissen-frontend
+          ports:
+            - containerPort: 80
