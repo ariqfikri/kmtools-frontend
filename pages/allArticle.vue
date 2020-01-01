@@ -16,9 +16,9 @@
     </div>
     <v-container v-if="loading" fluid>
       <v-row dense>
-        <v-col v-for="card in cards" :key="card.title" cols="4">
+        <v-col v-for="card in cards" :key="card.title" cols="6">
           <v-card class="pa-2 ma-1" :to="'/article/' + card.id">
-            <v-img :src="card.src" class=" align-end" height="200px">
+            <v-img src="images.png" class=" align-end" height="200px">
               <v-card-title v-text="card.title"></v-card-title>
             </v-img>
 

@@ -8,19 +8,12 @@
           style="margin-top:10px"
         ></v-img>
       </v-btn>
-      <v-autocomplete
-        background-color="white"
-        rounded
-        outlined
-        clearable
-        dense
-        append-icon="mdi-magnify"
-        style="margin-top:30px;width:30px"
-      ></v-autocomplete>
       <v-spacer></v-spacer>
       <v-btn icon class="white--text ma-2" @click="create"
-        ><v-icon>mdi-file-edit-outline</v-icon></v-btn
+        ><v-icon>mdi-file-edit-outline</v-icon>
+        <p class="ma-2">Write</p></v-btn
       >
+
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn style="margin-bottom:10px" text v-on="on">
@@ -32,7 +25,7 @@
         </template>
         <v-list>
           <v-list-item @click="activity">
-            <v-list-item-title>profil</v-list-item-title>
+            <v-list-item-title>Profil</v-list-item-title>
           </v-list-item>
           <v-list-item @click="profil">
             <v-list-item-title>Setting</v-list-item-title>
@@ -74,26 +67,6 @@ export default {
       drawer: null,
       fixed: null,
       user: [],
-      items: [
-        {
-          icon: 'mdi-home',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-timelapse',
-          title: 'Inspire'
-        },
-        {
-          icon: 'mdi-bell',
-          title: 'Inspire'
-        },
-        {
-          icon: 'mdi-credit-card-plus',
-          title: 'Inspire',
-          to: '/templateCreate'
-        }
-      ],
       miniVariant: true,
       right: true,
       rightDrawer: false,
@@ -118,7 +91,7 @@ export default {
         })
         .then((response) =>{
           console.log(response)
-          this.$router.push('/login')
+          this.$auth.logout('/login')
         })
         .catch(function(error) {
           console.log(error)

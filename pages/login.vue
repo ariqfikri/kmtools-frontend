@@ -20,7 +20,9 @@
               style="border-style:solid;border-color:#448CCB"
             >
               <v-toolbar color="white black--text" dark flat>
-                <v-toolbar-title>Login</v-toolbar-title>
+                <v-toolbar-title style="margin-left:150px"
+                  >Login</v-toolbar-title
+                >
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
@@ -41,9 +43,12 @@
                   ></v-text-field>
                 </v-form>
               </v-card-text>
+              <nuxt-link to="/signup" style="margin-left:100px"
+                >Dont have an account? Sign up</nuxt-link
+              >
               <v-card-actions>
                 <v-row justify="center">
-                  <v-btn color="primary" width="100px" @click="login"
+                  <v-btn color="primary" width="345px" @click="login"
                     >Login</v-btn
                   >
                 </v-row>

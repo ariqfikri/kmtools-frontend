@@ -20,11 +20,10 @@
     </div>
     <v-container v-if="loading" fluid>
       <v-row dense>
-        <v-col v-for="card in cards" :key="card.title" cols="4">
+        <v-col v-for="card in cards" :key="card.title" cols="6">
           <v-card class="pa-2 ma-1" :to="'/article/' + card.id">
-            <v-img src="" class=" align-end" height="200px">
+            <v-img src="/images.png" class=" align-end" height="200px">
               <v-card-title v-text="card.title"></v-card-title>
-              <v-card-text v-text="card.content"></v-card-text>
             </v-img>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -54,11 +53,10 @@
     </div>
     <v-container v-if="loading2" fluid>
       <v-row dense>
-        <v-col v-for="card in error" :key="card.id" cols="4">
+        <v-col v-for="card in error" :key="card.id" cols="6">
           <v-card class="pa-2 ma-1" :to="'/article/' + card.id">
-            <v-img src="" class=" align-end" height="200px">
+            <v-img src="/images.png" class=" align-end" height="200px">
               <v-card-title v-text="card.title"></v-card-title>
-              <TuiEditorViewer :value="card.content" />
             </v-img>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -73,6 +71,7 @@
 <script>
 /* eslint-disable */
 export default {
+   middleware: 'auth',
    props: ['items'],
   data() {
     return {
@@ -81,7 +80,7 @@ export default {
       gambar: { src: '/kb-header.jpg' },
       cards: [],
       trouble: [],
-      error: []
+      error: [{gambar:'/vuejs.jpg'}]
       
     }
   },
