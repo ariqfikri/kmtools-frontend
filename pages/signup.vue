@@ -68,6 +68,7 @@
 /* eslint-disable */
 import Swal from 'sweetalert2'
     export default {
+       
         layout: 'empty',
         mounted() {
             console.log('Component mounted.')

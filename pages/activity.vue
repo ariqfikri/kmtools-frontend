@@ -4,7 +4,7 @@
       <v-row
         ><v-col class="d-flex justify-center"
           ><v-avatar size="200px">
-            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+            <img src="user-3.png" alt="John" />
           </v-avatar>
         </v-col>
       </v-row>
@@ -31,9 +31,8 @@
         <v-row dense class="d-flex justify-center">
           <v-col v-for="card in activity" :key="card.id" cols="8">
             <v-card class="pa-2 ma-1" :to="'/article/' + card.article.id">
-              <v-img src="" class=" align-end" height="200px">
+              <v-img src="images.png" class=" align-end" height="200px">
                 <v-card-title v-text="card.article.title"></v-card-title>
-                <v-card-text v-text="card.article.content"></v-card-text>
               </v-img>
               <v-card-actions>
                 <v-spacer></v-spacer>

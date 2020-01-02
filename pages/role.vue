@@ -31,9 +31,11 @@
   </v-app>
 </template>
 <script>
+/* eslint-disable */
 export default {
-  /* eslint-disable */
+  
   layout: 'empty',
+  
   data() {
     return {
       button: [],
